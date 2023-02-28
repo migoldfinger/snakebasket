@@ -1,15 +1,41 @@
 {
-  "name": "snakebasket",
-  "version": "0.0.1",
-  "description": "Modified implementation of bentobox",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^2.0.1",
-    "hardhat": "^2.12.7"
-  }
+	"name": "warpdrive",
+	"version": "0.0.1",
+	"description": "Modified implementation of bentobox",
+	"author": "Ing. Michael Goldfinger",
+	"license": "MIT",
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"scripts": {
+		"build": "hardhat compile",
+		"deploy:mainnet": "hardhat --network mainnet deploy",
+		"verify:mainnet": "hardhat --network mainnet etherscan-verify --solc-input",
+		"export:mainnet": "hardhat --network mainnet export --export exports/mainnet.json",
+		"deploy:goerli": "hardhat --network goerli deploy",
+		"verify:goerli": "hardhat --network goerli etherscan-verify --solc-input",
+		"export:goerli": "hardhat --network goerli export --export exports/goerli.json",
+		"test": "hardhat test",
+		"test:coverage": "npm run build && cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" hardhat coverage",
+		"test:gas": "cross-env REPORT_GAS=true npm run test",
+		"lint": "npm run lint-ts && npm run lint-sol",
+		"lint:fix": "npm run lint-ts:fix && npm run lint-sol:fix",
+		"lint-sol": "solhint -f table -c .solhint.json \"contracts/**/*.sol\"",
+		"lint-sol:fix": "solhint -f table -c .solhint.json \"contracts/**/*.sol\" --fix",
+		"lint-ts": "eslint . --format table",
+		"lint-ts:fix": "eslint . --format table --fix"
+	},
+	"devDependencies": {
+		"@nomicfoundation/hardhat-toolbox": "^2.0.1",
+		"@tsconfig/node18": "^1.0.1",
+		"@typescript-eslint/eslint-plugin": "^5.54.0",
+		"eslint": "^8.35.0",
+		"eslint-formatter-table": "^7.32.1",
+		"eslint-plugin-node": "^11.1.0",
+		"hardhat": "^2.12.7",
+		"hardhat-abi-exporter": "^2.10.1",
+		"hardhat-contract-sizer": "^2.8.0",
+		"hardhat-deploy": "^0.11.24",
+		"solhint": "^3.4.0"
+	}
 }
